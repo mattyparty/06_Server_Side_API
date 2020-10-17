@@ -22,26 +22,74 @@
     <!-- container Begin -->
     <div class="container-fluid">
       <!-- A fluid container that uses the full witdh -->
-      <div class = "col-2">
-      <div class="input-group">
-        <input type="text" class="form-control" placeholder="Search for a City">
-        <div class="input-group-append">
-          <button class="btn btn-secondary" type="button">
-            <i class="fa fa-search"></i>
-          </button>
+      <div class="row">
+        <div class="col-3">
+          <div class="input-group">
+            <input
+              type="text"
+              class="form-control"
+              id="search-field"
+              placeholder="Search for a City"
+            />
+            <div class="input-group-append">
+              <button
+                class="btn btn-secondary"
+                id="search-city-btn"
+                type="button"
+              >
+                <i class="fa fa-search"></i>
+              </button>
+            </div>
+          </div>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime</p>
+        </div>
+        <!-- ------------------------->
+        <div class="col-9">
+          <div id="current-conditions"></div>
+
+          <div id="five-day-forecast">
+            <!-- -------Day 1 Forecast------------->
+
+            <div class="row">
+              <h1>5-Day Forecast</h1>
+            </div>
+            <div class="row">
+              <div class="card col-md-2 col-sm-12">
+                <div class="card-body" id="day-one">
+                  <!-- -------Day 1 Forecast data goes here---->
+                </div>
+              </div>
+              <!-- -----Day 2 Forecast--------->
+              <div class="card col-md-2 col-sm-12">
+                <div class="card-body" id="day-two">
+                  <!-- -------Day 2 Forecast data goes here---->
+                </div>
+              </div>
+              <!-- ------Day 3 Forecast------->
+              <div class="card col-md-2 col-sm-12">
+                <div class="card-body" id="day-three">
+                  <!-- -------Day 3 Forecast data goes here---->
+                </div>
+              </div>
+              <!-- ------Day 4 Forecast------->
+              <div class="card col-md-2 col-sm-12">
+                <div class="card-body" id="day-four">
+                  <!-- -------Day 4 Forecast data goes here---->
+                </div>
+              </div>
+              <!-- ------Day 5 Forecast------->
+              <div class="card col-md-2 col-sm-12">
+                <div class="card-body" id="day-five">
+                  <!-- -------Day 5 Forecast data goes here---->
+                </div>
+              </div>
+              <!-- ----end of forecast Cards----------->
+            </div>
+            <!-- ------------------------->
+          </div>
         </div>
       </div>
-    </div>
-        <!-- Row End-->
-        <!-- <div class="col-md-9 col-sm-3">
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quaerat
-          laborum sunt itaque labore nemo nesciunt consequuntur neque quisquam,
-          quod ea rem suscipit ut asperiores? Consequatur perspiciatis
-          voluptates sequi! Unde, tempora!
-        </div> -->
-        <!-- Row End-->
-      </div>
-      <!-- container end -->
+      <!-- container End-->
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript" src="./assets/script.js"></script>
