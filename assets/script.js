@@ -47,9 +47,8 @@
 //     localStorage.getItem("citySearchStorage")
 //   );
 // }
-
+var apikey = "e29b1c89c8da9ec620dfeea74ecf210c";
 function renderWeatherData(city) {
-  var apikey = "e29b1c89c8da9ec620dfeea74ecf210c";
   //Current Forecast API Call
   var queryUrlCurrentForecast =
     "http://api.openweathermap.org/data/2.5/weather?q=" +
@@ -61,14 +60,18 @@ function renderWeatherData(city) {
     url: queryUrlCurrentForecast,
     method: "GET",
   }).then(function (response) {
-    var currentTemp = "<h3>Temperature: " + response.main.temp + " °F</h3>";
-    var currentHumidity = "<h3>Humidty: " + response.main.temp + " %</h3>";
+    var currentDate = moment(response.dt * 1000).format("DD MMM YYYY");
+    var currentCity = "<h2>" + city + " (" + currentDate + ")</h2>";
+
+    var currentTemp = "<h4>Temperature: " + response.main.temp + " °F</h4>";
+    var currentHumidity = "<h4>Humidty: " + response.main.temp + " %</h4>";
     var currentWindspeed =
-      "<h3>Wind Speed: " + response.wind.speed + " MPH</h3>";
+      "<h4>Wind Speed: " + response.wind.speed + " MPH</h4>";
     // Get long and latitdue for UV index API Call below
     var long = response.coord.lon;
     var lat = response.coord.lat;
 
+    $("#current-conditions").append(currentCity);
     $("#current-conditions").append(currentTemp);
     $("#current-conditions").append(currentHumidity);
     $("#current-conditions").append(currentWindspeed);
@@ -85,34 +88,52 @@ function renderWeatherData(city) {
       url: queryUrlCurrentUvIndex,
       method: "GET",
     }).then(function (responseUv) {
-      //Apend Current Weather Conditions
-      var uvIndex = "<h3>UV Index: " + responseUv.value + "</h3>";
+      //Apend Current UV Index
+      var uvIndex = "<h4>UV Index: " + responseUv.value + "</h4>";
       $("#current-conditions").append(uvIndex);
+    });
+    //Five Day Forecast Data Conditions
+    queryUrlFiveDayForecast =
+      "https://api.openweathermap.org/data/2.5/onecall?lat=" +
+      lat +
+      "&lon=" +
+      long +
+      "&exclude=hourly&units=imperial&appid=" +
+      apikey;
+
+    $.ajax({
+      url: queryUrlFiveDayForecast,
+      method: "GET",
+    }).then(function (responseFiveDay) {
+      //appending the five day forecast elements
+      for (var i = 0; i < 5; i++) {
+        //var i = 0;
+        // setting variable for forcast container id
+        var forecastConainter = $("#" + i);
+        // setting variables for various forecast elements
+        var forecastDate =
+          "<h6>" +
+          moment(responseFiveDay.daily[i].dt * 1000).format("DD MMM YYYY") +
+          "</h6>";
+        var forecastImageUrl =
+          "http://openweathermap.org/img/wn/" +
+          responseFiveDay.daily[i].weather[0].icon +
+          "@2x.png";
+
+        var forecastTemp =
+          "<h6>Temp: " + responseFiveDay.daily[i].temp.day + " °F</h6>";
+        var forecastHumid =
+          "<h6>Humidity: " + responseFiveDay.daily[i].humidity + " %</h6>";
+        // appending forecast elements to DOM
+
+        forecastConainter.append(forecastDate);
+        $("<img />", { src: forecastImageUrl }).appendTo(forecastConainter);
+        forecastConainter.append(forecastTemp);
+        forecastConainter.append(forecastHumid);
+        ///////////////
+      }
     });
   });
 }
-function renderFiveDayForecast(city) {
-  var apikey = "e29b1c89c8da9ec620dfeea74ecf210c";
-  queryUrlFiveDayForecast =
-    "http://api.openweathermap.org/data/2.5/forecast?q=" +
-    city +
-    "&units=imperial&appid=" +
-    apikey;
-  $.ajax({
-    url: queryUrlFiveDayForecast,
-    method: "GET",
-  }).then(function (responseFiveDay) {
-    console.log(responseFiveDay);
-    console.log(responseFiveDay.list[3].main.temp);
-    $("#day-one").append(responseFiveDay.list[3].main.temp);
-    $("#day-one").append(
-      '<img id="theImg" src="http://openweathermap.org/img/wn/10d@2x.png" />'
-    );
-    $("#day-two").append(responseFiveDay.list[11].main.temp);
-    $("#day-three").append(responseFiveDay.list[19].main.temp);
-    $("#day-four").append(responseFiveDay.list[27].main.temp);
-    $("#day-five").append(responseFiveDay.list[35].main.temp);
-  });
-}
+
 renderWeatherData("Wichita");
-renderFiveDayForecast("Wichita");
