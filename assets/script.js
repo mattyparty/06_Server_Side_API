@@ -1,52 +1,17 @@
-// var citySearches = [];
+var citySearches = [];
 
-// init();
+function init() {
+  var citySearchStorage = JSON.parse(localStorage.getItem("citySearchStorage"));
+  if (citySearchStorage !== null) {
+    citySearches = citySearchStorage;
+  }
+}
 
-// function renderLocalStorage() {
-//   localStorage.setItem("citySearchStorage", JSON.stringify(citySearches));
-// }
-// // Takes the value from the search field
-// $("#search-city-btn").on("click", function (event) {
-//   event.preventDefault();
-//   var searchCity = $("#search-field").val();
-// });
+function storeCities() {
+  // Stringify and set push citySearches Array to local Storage
+  localStorage.setItem("citySearchStorage", JSON.stringify(citySearches));
+}
 
-// var cityName = "Wichita";
-// var apikey = "e29b1c89c8da9ec620dfeea74ecf210c";
-// var queryUrlCurrentForecast =
-//   "http://api.openweathermap.org/data/2.5/weather?q=" +
-//   cityName +
-//   "&appid=" +
-//   apikey;
-
-// $.ajax({
-//   url: queryUrlCurrentForecast,
-//   method: "GET",
-// }).then(function (response) {
-//   console.log(response);
-//   //   console.log(response.main.temp);
-// });
-
-// function renderData() {}
-// // F
-// $("#search-city-btn").on("click", function (event) {
-//   event.preventDefault();
-//   var searchCity = $("#search-field").val();
-//   console.log(searchCity);
-//   if (searchCity === "") {
-//     return;
-//   }
-//   citySearches.push(searchCity);
-
-//   searchCity.value = "";
-//   renderLocalStorage();
-// });
-
-// function init() {
-//   var storedCitySearches = JSON.parse(
-//     localStorage.getItem("citySearchStorage")
-//   );
-// }
 var apikey = "e29b1c89c8da9ec620dfeea74ecf210c";
 function renderWeatherData(city) {
   //Current Forecast API Call
@@ -135,5 +100,50 @@ function renderWeatherData(city) {
     });
   });
 }
+// function to clear the forecast before updating with new
+function clearForecasts() {
+  $("#current-conditions").empty();
+  $("#0").empty();
+  $("#1").empty();
+  $("#2").empty();
+  $("#3").empty();
+  $("#4").empty();
+}
 
+$("#search-city-btn").on("click", function (event) {
+  event.preventDefault();
+  var searchCity = $("#search-field").val().trim();
+  clearForecasts();
+  renderWeatherData(searchCity);
+  belfast(searchCity);
+  citySearches.push(searchCity);
+
+  storeCities();
+  renderRecentSearches();
+});
+
+$("#search-history").on("click", "tr", function (event) {
+  clearForecasts();
+  renderWeatherData($(this).text());
+});
+
+function belfast(city) {
+  if (city === "belfast") {
+    $("#jumbo").empty();
+    $("#jumbo").append("<h1>Miss You Simon!!!</h1>");
+  }
+}
+
+function renderRecentSearches() {
+  $("#search-history").empty();
+  for (let i = 0; i < citySearches.length; i++) {
+    var searchHistory = '<tr><th scope="row">' + citySearches[i] + "</th></tr>";
+
+    $("#search-history").append(searchHistory);
+  }
+}
+
+init();
+console.log(citySearches.length);
+renderRecentSearches();
 renderWeatherData("Wichita");

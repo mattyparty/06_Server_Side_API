@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="./Assets/style.css" />
     <title>Weather Dashboard</title>
   </head>
-  <header class="jumbotron">
+  <header class="jumbotron" id="jumbo">
     <h1 class="display-4">Weather Dashboard</h1>
   </header>
 
@@ -41,7 +41,14 @@
               </button>
             </div>
           </div>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime</p>
+          <!-- recent searches go here------>
+          <table class="table table-bordered">
+            <tbody id="search-history">
+              <!-- <tr>
+                <th scope="row">1</th>
+              </tr> -->
+            </tbody>
+          </table>
         </div>
         <!-- ------------------------->
         <div class="col-9">

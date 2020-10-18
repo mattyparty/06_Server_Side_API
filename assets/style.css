@@ -23,3 +23,6 @@
 #current-conditions {
   border-style: solid;
 }
+.card-body {
+  background-color: cadetblue;
+}
