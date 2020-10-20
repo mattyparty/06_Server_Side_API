@@ -10,7 +10,8 @@ I give you my Weather Dashboard. Overall this one wasnt too tough. I was able to
 
 - I used Dom manipulation to create the various forecast elements. This got a little tricky with the Five day. I used a loop of 5 to create the forecast elements. I did this easily by ID'ing the forecast cards 1 through 5
 
-- [Link to Deployed Project Contact](http://pewewardy.com/06_server_side_api/)
+- [Link to Deployed Project Contact](http://pewewardy.com/06_Server_Side_API/)
+
 - [Link to Git Hub Repository](https://github.com/mattyparty/06_Server_Side_API/)
 
 # Screen Shot of Deployed index page
