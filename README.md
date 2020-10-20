@@ -15,4 +15,4 @@ I give you my Weather Dashboard. Overall this one wasnt too tough. I was able to
 
 # Screen Shot of Deployed index page
 
-![Weather Dashboard](/https://raw.githubusercontent.com/mattyparty/06_Server_Side_API/main/assets/WeatherDashboardScreenShot.png"Deployed Index Screen Shot")
+![Weather Dashboard](https://raw.githubusercontent.com/mattyparty/06_Server_Side_API/main/assets/WeatherDashboardScreenShot.png"Deployed Index Screen Shot")
