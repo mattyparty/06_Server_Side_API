@@ -72,7 +72,6 @@ function renderWeatherData(city) {
     }).then(function (responseFiveDay) {
       //appending the five day forecast elements
       for (var i = 0; i < 5; i++) {
-        //var i = 0;
         // setting variable for forcast container id
         var forecastConainter = $("#" + i);
         // setting variables for various forecast elements
@@ -95,7 +94,6 @@ function renderWeatherData(city) {
         $("<img />", { src: forecastImageUrl }).appendTo(forecastConainter);
         forecastConainter.append(forecastTemp);
         forecastConainter.append(forecastHumid);
-        ///////////////
       }
     });
   });
@@ -115,7 +113,6 @@ $("#search-city-btn").on("click", function (event) {
   var searchCity = $("#search-field").val().trim();
   clearForecasts();
   renderWeatherData(searchCity);
-  belfast(searchCity);
   citySearches.push(searchCity);
 
   storeCities();
@@ -127,16 +124,14 @@ $("#search-history").on("click", "tr", function (event) {
   renderWeatherData($(this).text());
 });
 
-function belfast(city) {
-  if (city === "belfast") {
-    $("#jumbo").empty();
-    $("#jumbo").append("<h1>Miss You Simon!!!</h1>");
-  }
-}
-
 function renderRecentSearches() {
   $("#search-history").empty();
-  for (let i = 0; i < citySearches.length; i++) {
+  //litmis the recent history to 5
+  var citySearchesLength = "";
+  if (citySearches.length > 6) {
+    citySearchesLength = 5;
+  } else citySearchesLength = citySearches.length;
+  for (let i = 0; i < citySearchesLength; i++) {
     var searchHistory = '<tr><th scope="row">' + citySearches[i] + "</th></tr>";
 
     $("#search-history").append(searchHistory);
@@ -144,6 +139,5 @@ function renderRecentSearches() {
 }
 
 init();
-console.log(citySearches.length);
 renderRecentSearches();
-renderWeatherData("Wichita");
+renderWeatherData("wichita");
