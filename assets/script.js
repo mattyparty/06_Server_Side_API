@@ -139,5 +139,7 @@ function renderRecentSearches() {
 }
 
 init();
+
 renderRecentSearches();
-renderWeatherData("wichita");
+//render weather forecast of last search
+renderWeatherData(citySearches[citySearches.length - 1]);
